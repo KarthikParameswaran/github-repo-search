@@ -1,0 +1,53 @@
+<div class="container" id="search-container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1>Github Repo Search</h1>
+            </div>
+            <p>You can search for the Github public repos.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <%= form_with url: "/", method: :get do |form| %>
+                <%= form.text_field :query, class: 'col-md-6', placeholder: "Search repos", value: @query %>
+                <%= form.button "Search", class: 'col-md-2 btn btn-primary' %>
+            <% end %>
+        </div>
+    </div>
+    <% if !@error && @repos.size > 0 %>
+        <div class="row">
+            <div class="offset-lg-11 col-lg-1t" id="results-count">
+                Results: <%= @total_size %>
+            </div>
+            <div class="col-lg-12">
+                <table class="table" id="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>License</th>
+                            <th>Visibility</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @repos.each do |repo| %>
+                            <tr>
+                                <td><a href="<%= repo[:html_url] %>" target="_blank"><%= repo[:name]&.humanize %></a></td>
+                                <td><%= repo[:description] %></td>
+                                <td><%= repo[:license] %></td>
+                                <td><%= repo[:visibility] %></td>
+                                <td><%= repo[:score] %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
+        <%= paginate @repos %>
+    <% elsif @error %>
+        <p>Sorry for the inconvience. Unable to process the request at the moment.</p>
+    <% end %>
+</div>

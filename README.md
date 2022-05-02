@@ -17,7 +17,7 @@ rails s
 ```
 
 ### Sample Image 1:
-![Sample Image 1](./samples/initial.png)
+![Sample Image 1](./samples/initialpage.png)
 ### Sample Image 2:
 ![Sample Image 2](./samples/sample1.png)
 ### Sample Image 3:
